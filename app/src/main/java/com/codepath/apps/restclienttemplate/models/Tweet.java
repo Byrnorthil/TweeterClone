@@ -1,5 +1,7 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import com.codepath.apps.restclienttemplate.TimeFormatter;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,17 +14,20 @@ public class Tweet {
     public String body;
     public String createdAt;
     public User user;
+    public long id;
 
-    public Tweet (String body, String createdAt, User user) {
+    public Tweet (String body, String createdAt, User user, long id) {
         this.body = body;
         this.createdAt = createdAt;
         this.user = user;
+        this.id = id;
     }
 
     public static Tweet fromJson(@NotNull JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet(jsonObject.getString("text"),
                 jsonObject.getString("created_at"),
-                User.fromJson(jsonObject.getJSONObject("user")));
+                User.fromJson(jsonObject.getJSONObject("user")),
+                jsonObject.getLong("id"));
         return tweet;
     }
 
@@ -32,5 +37,9 @@ public class Tweet {
             tweets.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return tweets;
+    }
+
+    public String getFormattedCreatedAt() {
+        return TimeFormatter.getTimeDifference(createdAt) + " ago";
     }
 }

@@ -15,6 +15,8 @@ import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.databinding.ItemTweetBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
@@ -45,6 +47,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         return tweets.size();
     }
 
+    public void clear() {
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Tweet> tweetList) {
+        tweets.addAll(tweetList);
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         final ItemTweetBinding binding;
@@ -52,16 +64,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
+        TextView tvCreatedAt;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             binding = ItemTweetBinding.bind(itemView);
+            ivProfileImage = binding.ivProfileImage;
+            tvScreenName = binding.tvScreenName;
+            tvBody = binding.tvBody;
+            tvCreatedAt = binding.tvCreatedAt;
         }
 
-        public void bind(Tweet tweet) {
+        public void bind(@NotNull Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
+            tvCreatedAt.setText(tweet.getFormattedCreatedAt());
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
         }
     }

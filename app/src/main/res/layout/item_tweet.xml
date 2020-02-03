@@ -38,5 +38,17 @@
             android:layout_marginTop="2dp"
             android:layout_toEndOf="@+id/ivProfileImage"
             tools:text="Dis is me tweet!" />
+
+        <TextView
+            android:id="@+id/tvCreatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvBody"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/tvScreenName"
+            tools:text="10 mins ago" />
     </RelativeLayout>
 </layout>
