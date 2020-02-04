@@ -17,7 +17,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/ivProfileImage"
-            tools:text="Byrnorthil" />
+            tools:text="Byrnorthil"/>
 
         <ImageView
             android:id="@+id/ivProfileImage"
@@ -37,6 +37,8 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
             android:layout_toEndOf="@+id/ivProfileImage"
+            android:autoLink="all"
+            android:linksClickable="true"
             tools:text="Dis is me tweet!" />
 
         <TextView
